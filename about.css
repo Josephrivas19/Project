@@ -1,0 +1,135 @@
+/* ---------- GLOBAL ---------- */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Poppins", sans-serif;
+  background: #0f0f0f;
+  color: #fff;
+  line-height: 1.6;
+}
+
+/* ---------- HEADER ---------- */
+header {
+  width: 100%;
+  position: fixed;
+  top: 0;
+  background: rgba(20,20,20,0.85);
+  border-bottom: 1px solid #333;
+  padding: 15px 0;
+  backdrop-filter: blur(10px);
+}
+
+.header-container {
+  max-width: 1300px;
+  margin: auto;
+  padding: 0 40px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.brand {
+  font-size: 1.7rem;
+  font-weight: 700;
+}
+
+.lesson-nav ul {
+  list-style: none;
+  display: flex;
+  gap: 25px;
+}
+
+.lesson-nav a {
+  text-decoration: none;
+  color: #ccc;
+  padding: 6px 12px;
+  border-radius: 6px;
+  transition: 0.3s;
+}
+
+.lesson-nav a:hover {
+  background: rgba(150,100,255,0.2);
+  color: #fff;
+}
+
+.lesson-nav .active {
+  background: #7b2fff;
+  color: #fff;
+}
+
+/* ---------- ABOUT SECTION ---------- */
+
+.about-section {
+  padding: 140px 10%;
+}
+
+.about-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 50px;
+}
+
+.about-text {
+  max-width: 600px;
+}
+
+.about-text h2 {
+  font-size: 48px;
+  color: #b38bff;
+  margin-bottom: 20px;
+  text-shadow: 0 0 12px rgba(179,139,255,0.4);
+}
+
+.about-text p {
+  margin-bottom: 20px;
+  color: #e0e0e0;
+  font-size: 18px;
+}
+
+.purple {
+  color: #c7a3ff;
+  font-weight: 600;
+}
+
+.about-image img {
+  width: 500px;
+  height: 500px;
+  border-radius: 20px;
+  object-fit: cover;
+  box-shadow: 0 0 25px rgba(150,100,255,0.4);
+  animation: float 4s infinite ease-in-out;
+}
+
+/* Social links under About Me */
+.social-links {
+  margin-top: 25px;
+  display: flex;
+  flex-direction: column; /* Vertical layout */
+  gap: 15px; /* Space between links */
+}
+
+.social-links a {
+  font-size: 20px; /* Slightly smaller for readability */
+  color: #ffffff; /* White for dark theme */
+  text-decoration: none;
+  display: flex;
+  align-items: center; /* Vertically center icon & text */
+  gap: 10px; /* Space between icon and text */
+  transition: 0.3s ease;
+}
+
+.social-links a:hover {
+  color: #7b2fff;
+  transform: translateX(4px); /* Slight horizontal hover effect */
+}
+
+
+
+
+
+

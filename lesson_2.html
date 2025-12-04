@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Digital Note — Lesson 2: Principles of Cryptography & Virtualization</title>
+  <link rel="stylesheet" href="lesson2.css">
+</head>
+<body>
+  <header>
+    <header>
+    <div class="header-container">
+      <h1 class="brand"><a href="lesson_page.html">Digital Note</a></h1>
+      <nav class="lesson-nav">
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="about.html" >About</a></li>
+          <li><a href="skill.html">Skill</a></li>
+          <li><a href="lesson_page.html">Lessons</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  </header>
+
+  <main>
+    <aside class="sidebar">
+      <h2>Contents</h2>
+      <nav>
+        <ul>
+          <li><a href="#principles">Principles of Cryptography</a></li>
+          <li><a href="#hash">Hash Functions</a></li>
+          <li><a href="#ciphers">Ciphers</a></li>
+          <li><a href="#transport">Transport vs End-to-End Encryption</a></li>
+          <li><a href="#hypervisor">What is a Hypervisor</a></li>
+          <li><a href="#types-hypervisor">Types of Hypervisor</a></li>
+          <li><a href="#cloud-storage">Cloud Storage</a></li>
+          <li><a href="#cloud-models">Cloud Deployment Models</a></li>
+          <li><a href="#casb">Cloud Access Security Broker (CASB)</a></li>
+        </ul>
+      </nav>
+    </aside>
+
+    <article class="content">
+
+      <section id="principles">
+  <h2>Principles of Cryptography</h2>
+  <p>
+    Cryptography is the science and art of securing communication, protecting data, and ensuring trust in digital systems. 
+    It involves techniques that transform readable information into a form that can only be understood by authorized 
+    individuals or systems. The main purpose of cryptography is to protect data confidentiality, integrity, authenticity, and accountability 
+    even in the presence of malicious actors or insecure environments.
+
+    Modern cryptography combines principles from mathematics, computer science, and information theory to create secure communication channels and 
+    data protection mechanisms. It is the foundation of digital security used in applications such as secure messaging, online banking, 
+    e-commerce, and virtual private networks (VPNs).
+  </p>
+
+  <div class="principles-columns">
+    <div class="principle-card">
+      <h3>Encryption</h3>
+      <p><strong>Definition:</strong> Encryption is the process of transforming readable data (plaintext) into an unreadable form (ciphertext) using an algorithm and a key.</p>
+      <p><strong>Purpose:</strong> Ensures confidentiality so that only authorized parties can read the information.</p>
+      <p><strong>Example:</strong> Credit card information is encrypted before being sent online using HTTPS.</p>
+    </div>
+
+    <div class="principle-card">
+      <h3>Authentication</h3>
+      <p>Verifies the identity of a user, device, or system before granting access.</p>
+      <p><strong>Methods:</strong> Passwords, biometrics, certificates, or OTP codes.</p>
+    </div>
+
+    <div class="principle-card">
+      <h3>Integrity</h3>
+      <p>Ensures that data is not altered or corrupted during storage or transmission.</p>
+      <p>Achieved through hash functions and checksums for consistency verification.</p>
+    </div>
+
+    <div class="principle-card">
+      <h3>Non-Repudiation</h3>
+      <p>Prevents a sender from denying their involvement in a digital transaction.</p>
+      <p>Achieved using <strong>digital signatures</strong> and <strong>PKI (Public Key Infrastructure)</strong>.</p>
+    </div>
+  </div>
+</section>
+
+
+      <section id="hash">
+        <h2>Hash Functions</h2>
+        <p>Converts input data of any size into a fixed-length hash digest.</p>
+        <p><strong>Examples:</strong> MD5, SHA-1, SHA-256, SHA-3.</p>
+      </section>
+
+
+     <section id="ciphers">
+  <h2>Ciphers</h2>
+  <p>Ciphers are algorithms used for encryption and decryption — divided into symmetric and asymmetric types.</p>
+
+  <div class="ciphers-columns">
+    <div class="cipher-card">
+      <h3>Symmetric Encryption</h3>
+      <ul>
+        <li><strong>Key:</strong> One shared key for encryption and decryption.</li>
+        <li><strong>Examples:</strong> AES, DES, 3DES, RC6, IDEA.</li>
+        <li><strong>Advantage:</strong> Fast and efficient.</li>
+        <li><strong>Disadvantage:</strong> Key sharing can be insecure.</li>
+      </ul>
+    </div>
+
+    <div class="cipher-card">
+      <h3>Asymmetric Encryption</h3>
+      <ul>
+        <li><strong>Key:</strong> Uses a public and a private key.</li>
+        <li><strong>Examples:</strong> RSA, DSA, ECDSA, Diffie-Hellman.</li>
+        <li><strong>Advantage:</strong> Solves key distribution issues.</li>
+        <li><strong>Disadvantage:</strong> Slower than symmetric encryption.</li>
+      </ul>
+    </div>
+</section>
+
+
+      <section id="transport">
+  <h2>Transport vs End-to-End Encryption</h2>
+  <div class="transport-columns">
+    <div class="transport-card">
+      <h3>Transport Encryption</h3>
+      <p>Encrypts data between the client and the server (e.g., HTTPS). The server can still access the data.</p>
+    </div>
+    <div class="transport-card">
+      <h3>End-to-End Encryption (E2EE)</h3>
+      <p>Encrypts data on the sender’s device and decrypts it only on the recipient’s device (e.g., Signal, WhatsApp).</p>
+    </div>
+  </div>
+</section>
+
+
+      <section id="hypervisor">
+        <h2>What is a Hypervisor</h2>
+        <p>
+          A <strong>Hypervisor</strong>, is software that enables virtualization by allowing multiple operating systems to run on a single physical
+           machine. It manages and allocates hardware resources—such as CPU, memory, and storage—among virtual machines (VMs), ensuring they operate
+           independently and securely.
+          
+        </p>
+      </section>
+
+      <section id="types-hypervisor">
+        <h2>Types of Hypervisor</h2>
+        <p>There are two main types of hypervisors — <strong>Type 1 (Bare-metal)</strong> and <strong>Type 2 (Hosted)</strong>.</p>
+
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Feature</th>
+              <th>Type 1 — Bare-Metal (Native)</th>
+              <th>Type 2 — Hosted</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Architecture</strong></td>
+              <td>Runs directly on physical hardware without a host OS.</td>
+              <td>Runs on top of an existing operating system.</td>
+            </tr>
+            <tr>
+              <td><strong>Performance</strong></td>
+              <td>High performance, low latency.</td>
+              <td>Less efficient due to host OS overhead.</td>
+            </tr>
+            <tr>
+              <td><strong>Security</strong></td>
+              <td>More secure and isolated; fewer attack surfaces.</td>
+              <td>Less secure due to dependency on host OS.</td>
+            </tr>
+            <tr>
+              <td><strong>Use Case</strong></td>
+              <td>Data centers, cloud infrastructure, enterprise servers.</td>
+              <td>Testing, education, and desktop virtualization.</td>
+            </tr>
+            <tr>
+              <td><strong>Examples</strong></td>
+              <td>VMware ESXi, Microsoft Hyper-V, Xen, KVM</td>
+              <td>VirtualBox, VMware Workstation, Parallels Desktop</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <section id="cloud-storage">
+        <h2>Cloud Storage: 3 Varieties</h2>
+        <ul>
+          <li><strong>Cloud Storage Applications:</strong> Provide online space for file storage and access.</li>
+          <li><strong>File Synchronization:</strong> Keeps files updated across multiple devices.</li>
+          <li><strong>Content Delivery Networks (CDN):</strong> Distribute content globally to reduce latency.</li>
+        </ul>
+      </section>
+
+      <section id="cloud-models">
+        <h2>Cloud Deployment Models</h2>
+        <p>Each cloud model defines how services are hosted, managed, and accessed.</p>
+
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Model</th>
+              <th>Ownership</th>
+              <th>Accessibility</th>
+              <th>Advantages</th>
+              <th>Challenges</th>
+              <th>Use Cases</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Public Cloud</strong></td>
+              <td>Owned by third-party providers (AWS, Azure, GCP)</td>
+              <td>Available to anyone via the Internet</td>
+              <td>Low cost, scalable, easy to deploy</td>
+              <td>Limited control and shared resources</td>
+              <td>Startups, SaaS, web applications</td>
+            </tr>
+            <tr>
+              <td><strong>Private Cloud</strong></td>
+              <td>Owned by a single organization</td>
+              <td>Internal access only</td>
+              <td>Enhanced privacy and control</td>
+              <td>Expensive setup, limited scalability</td>
+              <td>Finance, government, healthcare</td>
+            </tr>
+            <tr>
+              <td><strong>Hybrid Cloud</strong></td>
+              <td>Combination of public and private</td>
+              <td>Controlled internal and external access</td>
+              <td>Flexible, secure, and cost-efficient</td>
+              <td>Complex integration and management</td>
+              <td>Enterprises with mixed workloads</td>
+            </tr>
+            <tr>
+              <td><strong>Community Cloud</strong></td>
+              <td>Shared among organizations with similar goals</td>
+              <td>Restricted to authorized members</td>
+              <td>Shared costs, collaboration, compliance</td>
+              <td>Limited scalability, coordination issues</td>
+              <td>Research, education, government groups</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <p><strong>Note:</strong> Connecting networks to external clouds inherits their risks — always enforce strong access control.</p>
+      </section>
+
+      <section id="casb">
+        <h2>Cloud Access Security Broker (CASB)</h2>
+        <p>A CASB ensures secure and compliant use of cloud services by enforcing policies and visibility.</p>
+        <ul>
+          <li>Monitors data movement between users and cloud apps.</li>
+          <li>Applies security rules like encryption and access restrictions.</li>
+          <li>Detects and mitigates risky behavior in cloud environments.</li>
+        </ul>
+      </section>
+
+    </article>
+  </main>
+
+  <footer>
+    <p>© 2025 Digital Note — Lesson 2: Principles of Cryptography & Virtualization</p>
+  </footer>
+</body>
+</html>

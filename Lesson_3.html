@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Digital Note — Lesson 3: OS Command Injection</title>
+  <link rel="stylesheet" href="lesson3.css">
+</head>
+<body>
+  <header>
+    <div class="header-container">
+    <h1 class="brand"><a href="lesson_page.html">Digital Note</a></h1>
+    <nav class="lesson-nav">
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="skill.html">Skill</a></li>
+        <li><a href="lesson_page.html">Lessons</a></li>
+      </ul>
+    </nav>
+  </div>
+  </header>
+
+  <main>
+    <aside class="sidebar">
+      <h2>Contents</h2>
+      <nav>
+        <ul>
+          <li><a href="#intro">What is OS Command Injection?</a></li>
+          <li><a href="#danger">Why is it Dangerous?</a></li>
+          <li><a href="#external">External Input & Special Characters</a></li>
+          <li><a href="#subtypes">Command Injection Subtypes</a></li>
+          <li><a href="#variant1">Variant 1: Argument Injection</a></li>
+          <li><a href="#variant2">Variant 2: Command Name Injection</a></li>
+          <li><a href="#mitigation">Mitigation Strategies</a></li>
+          <li><a href="#defense">Defense-in-Depth</a></li>
+        </ul>
+      </nav>
+    </aside>
+
+    <article class="content">
+      <section id="intro">
+        <h2>What is OS Command Injection?</h2>
+        <p>
+          <strong>OS Command Injection</strong> is a security vulnerability that allows an attacker to execute arbitrary
+          commands on the underlying operating system of a vulnerable application.
+        </p>
+        <p>
+          This occurs when the application passes unsanitized or unsafe user input directly into system-level functions or
+          shell commands.
+        </p>
+        <ul>
+          <li>Attackers exploit input fields (e.g., forms, cookies, HTTP headers).</li>
+          <li>The attacker’s goal is to run malicious OS commands on the server.</li>
+          <li>A successful attack gives full control over the target system.</li>
+        </ul>
+        <p><strong>Example:</strong></p>
+        <pre><code>Input:  google.com; rm -rf /</code></pre>
+        <p>If the application executes this input unsafely, the attacker’s extra command (<code>rm -rf /</code>)
+        could delete system files.</p>
+      </section>
+
+      <section id="danger">
+        <h2>Why is it Dangerous?</h2>
+        <ul>
+          <li>Allows attackers to execute <strong>arbitrary commands</strong> on the host operating system.</li>
+          <li>Exploitable even without direct OS access (e.g., in web apps or APIs).</li>
+          <li>If the vulnerable process runs with high privileges (root/admin), the attacker’s commands run with the same power.</li>
+          <li>Violates the <strong>Principle of Least Privilege</strong> — causing complete system compromise.</li>
+        </ul>
+        <p><strong>Example Impact:</strong> Attackers could create new users, read sensitive files, modify databases, or install malware.</p>
+      </section>
+
+      <section id="external">
+        <h2>The Role of External Input & Special Characters</h2>
+        <p>
+          Command injection is made possible when applications include <strong>untrusted external input</strong> in
+          system commands without proper sanitization.
+        </p>
+        <ul>
+          <li><strong>External Input:</strong> User-supplied data like form fields, URLs, cookies, or headers.</li>
+          <li><strong>Special Characters:</strong> Symbols such as <code>;</code>, <code>&</code>, <code>|</code>, and <code>||</code>
+            are interpreted by the shell as command separators.</li>
+          <li>If these are not escaped or filtered, the shell executes them as new commands.</li>
+        </ul>
+        <p><strong>Example:</strong></p>
+        <pre><code>ping google.com; whoami</code></pre>
+        <p>The <code>whoami</code> command runs immediately after the ping if the input isn’t validated.</p>
+      </section>
+
+      <section id="subtypes">
+        <h2>OS Command Injection Subtypes</h2>
+        <p>
+          OS command injection can occur in two main ways depending on how the untrusted input is used:
+        </p>
+        <ul>
+          <li><strong>Argument Injection:</strong> Unsafe data inserted into command arguments.</li>
+          <li><strong>Command Name Injection:</strong> Entire commands or paths are built from user input.</li>
+        </ul>
+      </section>
+
+      <section id="variant1">
+        <h2>Variant 1: Argument Injection</h2>
+        <p>
+          The application runs a legitimate system command but includes user input as an argument to that command.
+        </p>
+        <ul>
+          <li><strong>Example:</strong> <code>system("nslookup " + userInput)</code></li>
+          <li>If <code>userInput</code> is <code>google.com; whoami</code>, both commands will run.</li>
+          <li>The attacker can chain commands using separators like <code>;</code> or <code>&</code>.</li>
+        </ul>
+        <p><strong>Vulnerability Cause:</strong> Developer trusts user input and fails to escape or validate it properly.</p>
+      </section>
+
+      <section id="variant2">
+        <h2>Variant 2: Command Name or Path Injection</h2>
+        <p>
+          The application accepts user input that determines which program or command is executed.
+          This is more dangerous because the attacker can choose <em>which command</em> runs.
+        </p>
+        <ul>
+          <li><strong>Example:</strong> <code>exec(userInput)</code></li>
+          <li>If the attacker enters <code>cmd.exe</code> or <code>/bin/bash</code>, they gain shell access.</li>
+          <li>Even secure functions like <code>exec()</code> or <code>CreateProcess()</code> are vulnerable if input isn’t restricted.</li>
+        </ul>
+      </section>
+
+      <section id="mitigation">
+        <h2>Mitigation Strategies</h2>
+        <h3>1. Use Safe APIs and Parameterization</h3>
+        <ul>
+          <li>Use functions that separate commands from data.</li>
+          <li>Examples:
+            <ul>
+              <li><code>execve()</code> or <code>execl()</code> (C)</li>
+              <li><code>CreateProcess()</code> (Windows)</li>
+              <li><code>subprocess.run(["command", "arg"])</code> (Python)</li>
+            </ul>
+          </li>
+        </ul>
+
+        <h3>2. Escape and Encode Special Characters</h3>
+        <ul>
+          <li>Properly quote and escape all arguments passed to the shell.</li>
+          <li>Use strict allowlists (only letters, numbers, and safe symbols).</li>
+          <li>Reject or filter special characters that can alter command flow.</li>
+        </ul>
+
+        <h3>3. Avoid Shell Invocation Entirely</h3>
+        <ul>
+          <li>Instead of calling shell commands, use language-native libraries.</li>
+          <li>For example, use Python’s <code>os.listdir()</code> instead of <code>system("ls")</code>.</li>
+        </ul>
+
+        <h3>4. Pass Sensitive Data via Files or Standard Input</h3>
+        <p>
+          If possible, send input data through files or stdin instead of command-line arguments, preventing direct injection.
+        </p>
+      </section>
+
+      <section id="defense">
+        <h2>Defense-in-Depth Mitigations</h2>
+        <ul>
+          <li><strong>Input Validation:</strong> Treat all input as untrusted.
+            <ul>
+              <li>Use an “allow known good” validation method — only accept safe patterns.</li>
+              <li>Enforce length, type, and format checks.</li>
+              <li>Never rely solely on denylists (blacklists).</li>
+            </ul>
+          </li>
+          <li><strong>Attack Surface Reduction:</strong> Keep critical data and commands server-side. Avoid exposing direct system calls to users.</li>
+          <li><strong>Use Trusted Libraries and Frameworks:</strong> Leverage well-maintained libraries designed for secure command execution.</li>
+          <li><strong>Enforcement by Conversion:</strong> Map user inputs to predefined safe values (e.g., numeric IDs instead of filenames).</li>
+        </ul>
+        <p><strong>Example Defense:</strong> Instead of accepting filenames directly, allow users to select from a predefined list of safe files.</p>
+      </section>
+    </article>
+  </main>
+
+  <footer>
+    <p>© 2025 Digital Note — Lesson 3: OS Command Injection</p>
+  </footer>
+</body>
+</html>

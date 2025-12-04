@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Email Security Fundamentals</title>
+  <link rel="stylesheet" href="lesson8.css">
+</head>
+<body>
+
+<header>
+    <div class="header-container">
+      <h1 class="brand"><a href="lesson_page.html">Digital Note</a></h1>
+      <nav class="lesson-nav">
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="skill.html">Skill</a></li>
+          <li><a href="lesson_page.html" class="active">Lessons</a></li>
+        </ul>
+      </nav>
+    </div>
+</header>
+
+<main>
+  <aside class="sidebar">
+    <h2>Email Security</h2>
+    <nav>
+      <a href="#intro">Introduction</a>
+      <a href="#principles">Security Principles</a>
+      <a href="#encryption">Importance of Encryption</a>
+      <a href="#smime">S/MIME</a>
+      <a href="#openpgp">OpenPGP</a>
+      <a href="#threats">Threats & Vulnerabilities</a>
+      <a href="#headers">Email Headers</a>
+      <a href="#analyzer">Header Analyzer</a>
+      <a href="#conclusion">Conclusion</a>
+    </nav>
+  </aside>
+
+  <div class="content">
+
+    <section id="intro" class="card-box">
+      <h2>Email Security Fundamentals</h2>
+      <p>Email is one of the most used communication tools, making it a prime target for attacks. Protecting email ensures privacy, prevents fraud, and keeps sensitive data safe as it travels across networks.</p>
+    </section>
+
+    <section id="principles" class="card-box">
+      <h2>Core Email Security Principles</h2>
+      <ul>
+        <li><strong>Confidentiality:</strong> Only intended recipients should read the message.</li>
+        <li><strong>Integrity:</strong> Ensures the message is not altered.</li>
+        <li><strong>Availability:</strong> Email must remain accessible.</li>
+        <li><strong>Authentication:</strong> Confirms the sender’s identity.</li>
+        <li><strong>Non-repudiation:</strong> Sender cannot deny sending the message.</li>
+      </ul>
+    </section>
+
+    <section id="encryption" class="card-box">
+      <h2>Importance of Email Encryption & Signatures</h2>
+      <ul>
+        <li>Protects sensitive data from unauthorized access.</li>
+        <li>Ensures privacy in transit and storage.</li>
+        <li>Prevents data exposure and identity theft.</li>
+        <li>Helps organizations meet security standards.</li>
+        <li>Digital signatures verify sender identity and message authenticity.</li>
+      </ul>
+    </section>
+
+    <section id="smime" class="card-box">
+      <h2>S/MIME</h2>
+      <p>S/MIME uses digital certificates to provide secure email communication. It offers:</p>
+      <ul>
+        <li>Strong encryption</li>
+        <li>Digital signatures for authenticity</li>
+        <li>Protection against tampering</li>
+      </ul>
+    </section>
+
+    <section id="openpgp" class="card-box">
+      <h2>OpenPGP</h2>
+      <p>OpenPGP is an open-source method for encrypting and signing emails. It uses public-key cryptography:</p>
+      <ul>
+        <li>Public key for encryption</li>
+        <li>Private key for decryption</li>
+        <li>Supports all major operating systems</li>
+      </ul>
+    </section>
+
+    <section id="threats" class="card-box">
+      <h2>Common Threats & Vulnerabilities</h2>
+      <ul>
+        <li>Phishing & Spear Phishing</li>
+        <li>Malware via attachments or links</li>
+        <li>Email Spoofing</li>
+        <li>Business Email Compromise (BEC)</li>
+        <li>Social Engineering attacks</li>
+        <li>Zero-day exploits</li>
+      </ul>
+    </section>
+
+    <section id="headers" class="card-box">
+      <h2>Analyzing Email Headers</h2>
+      <table class="styled-table">
+        <thead>
+          <tr>
+            <th>Security Check</th>
+            <th>Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>SPF</td>
+            <td>Verifies if the sender’s IP is allowed to send mail for the domain.</td>
+          </tr>
+          <tr>
+            <td>DKIM</td>
+            <td>Uses cryptographic signatures to validate authenticity.</td>
+          </tr>
+          <tr>
+            <td>DMARC</td>
+            <td>Enforces SPF/DKIM rules and blocks failing emails.</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section id="analyzer" class="card-box">
+      <h2>Message Header Analyzer</h2>
+      <ul>
+        <li>Converts complex headers into readable form.</li>
+        <li>Shows SPF, DKIM, and DMARC results.</li>
+        <li>Displays each server hop for routing transparency.</li>
+        <li>Helps detect spoofing and suspicious paths.</li>
+      </ul>
+    </section>
+
+
+  </div>
+</main>
+
+<footer>
+  <p>Email Security — Digital Note © 2025</p>
+</footer>
+
+</body>
+</html>

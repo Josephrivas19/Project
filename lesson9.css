@@ -1,0 +1,228 @@
+/* ---------- GLOBAL ---------- */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: "Poppins", sans-serif;
+  background: #0b0b0b;
+  color: #e0e0e0;
+  line-height: 1.7;
+}
+
+/* ---------- HEADER ---------- */
+header {
+  width: 100%;
+  position: fixed;
+  top: 0;
+  background: linear-gradient(135deg, #1f1f1f, #111111);
+  border-bottom: 1px solid #333;
+  padding: 15px 0;
+  backdrop-filter: blur(12px);
+  box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+  z-index: 1000;
+}
+
+.header-container {
+  max-width: 1300px;
+  margin: auto;
+  padding: 0 40px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.brand {
+  font-size: 1.8rem;
+  font-weight: 800;
+}
+
+.brand a {
+  text-decoration: none;
+  color: #fff;
+}
+
+.lesson-nav ul {
+  display: flex;
+  gap: 25px;
+  list-style: none;
+}
+
+.lesson-nav a {
+  text-decoration: none;
+  color: #ccc;
+  padding: 8px 14px;
+  border-radius: 8px;
+  transition: 0.3s;
+}
+
+.lesson-nav a:hover,
+.lesson-nav a.active {
+  background: #7b2fff33;
+  color: #fff;
+  box-shadow: 0 2px 6px rgba(123,47,255,0.3);
+}
+
+/* ---------- MAIN LAYOUT ---------- */
+main {
+  display: flex;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding-top: 110px;
+}
+
+/* ---------- SIDEBAR ---------- */
+.sidebar {
+  position: fixed;
+  top: 110px;
+  left: 0;
+  width: 250px;
+  height: calc(100vh - 110px);
+  padding: 1rem;
+  background: #1a1a1a;
+  border-right: 1px solid #333;
+  overflow-y: auto;
+  box-shadow: 2px 0 8px rgba(0,0,0,0.5);
+  border-radius: 0 10px 10px 0;
+}
+
+.sidebar h2 {
+  color: #fff;
+  margin-bottom: 1rem;
+  font-size: 1.1rem;
+  text-transform: uppercase;
+}
+
+.sidebar nav ul {
+  list-style: none;
+  padding: 0;
+}
+
+.sidebar nav a {
+  display: block;
+  padding: 8px 10px;
+  margin: 6px 0;
+  color: #ccc;
+  text-decoration: none;
+  border-radius: 6px;
+  transition: 0.2s;
+}
+
+.sidebar nav a:hover {
+  background: #7b2fff33;
+  color: #fff;
+  transform: translateX(2px);
+  box-shadow: 0 2px 6px rgba(123,47,255,0.25);
+}
+
+/* ---------- CONTENT ---------- */
+.content {
+  margin-left: 270px;
+  padding: 2rem;
+  width: calc(100% - 270px);
+}
+
+.card-box {
+  background: #121212;
+  margin-bottom: 2rem;
+  padding: 1.8rem 2rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.5);
+}
+
+.card-box h2 {
+  color: #fff;
+  margin-bottom: 1rem;
+}
+
+.card-box p, .card-box ul, .card-box table {
+  color: #ddd;
+  font-size: 1rem;
+}
+
+.card-columns {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.inner-card {
+  flex: 1 1 45%;
+  background: #1a1a1a;
+  padding: 1rem;
+  border-radius: 10px;
+}
+
+/* ---------- TABLE ---------- */
+.styled-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 1rem;
+  overflow: hidden;
+  border-radius: 10px;
+  background: #1a1a1a;
+}
+
+.styled-table th,
+.styled-table td {
+  border: 1px solid #333;
+  padding: 12px 16px;
+  text-align: left;
+}
+
+.styled-table th {
+  background: #222;
+  color: #fff;
+  text-transform: uppercase;
+}
+
+.styled-table tr:nth-child(even) {
+  background: #1f1f1f;
+}
+
+.styled-table tr:hover {
+  background: #2a2a2a;
+  transition: 0.2s;
+}
+
+/* ---------- FOOTER ---------- */
+footer {
+  margin-top: 3rem;
+  padding: 1rem;
+  text-align: center;
+  color: #888;
+  border-top: 1px solid #333;
+}
+
+/* ---------- RESPONSIVE ---------- */
+@media (max-width: 900px) {
+  .sidebar {
+    position: static;
+    width: 100%;
+    height: auto;
+    border-radius: 0;
+    box-shadow: none;
+  }
+
+  .content {
+    margin-left: 0;
+    width: 100%;
+    padding: 1.2rem;
+  }
+
+  main {
+    flex-direction: column;
+    padding-top: 160px;
+  }
+
+  .card-columns, .inner-card {
+    flex-direction: column;
+    width: 100%;
+  }
+}

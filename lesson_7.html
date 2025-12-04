@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Digital Note — Lesson 5: Network Traffic Analysis</title>
+  <link rel="stylesheet" href="lesson7.css">
+</head>
+<body>
+
+<header>
+  <div class="header-container">
+    <h1 class="brand"><a href="lesson_page.html">Digital Note</a></h1>
+    <nav class="lesson-nav">
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="skill.html">Skill</a></li>
+        <li><a href="lesson_page.html" >Lessons</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <aside class="sidebar">
+    <h2>Contents</h2>
+    <nav>
+      <ul>
+        <li><a href="#intro">Introduction</a></li>
+        <li><a href="#osi">OSI Model Primer</a></li>
+        <li><a href="#definition">Definition</a></li>
+        <li><a href="#tools">Common Tools</a></li>
+        <li><a href="#importance">Importance</a></li>
+      </ul>
+    </nav>
+  </aside>
+
+  <article class="content">
+
+    <section id="intro" class="card-box">
+      <h2>Introduction to Network Traffic Analysis</h2>
+      <p>
+        Network Traffic Analysis (NTA) involves capturing, inspecting, and interpreting the flow of data
+        across a network. It is essential for maintaining security, detecting anomalies, and ensuring optimal
+        network performance.
+      </p>
+      <p>
+        Proper analysis helps organizations understand normal traffic patterns and quickly respond to unusual or malicious activity.
+      </p>
+    </section>
+
+   <section id="osi" class="card-box">
+  <h2>OSI Model Primer</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>Layer</th>
+        <th>Purpose / Description</th>
+        <th>Examples / Protocols</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>7 – Application</td>
+        <td>User interface protocols</td>
+        <td>HTTP, FTP</td>
+      </tr>
+      <tr>
+        <td>6 – Presentation</td>
+        <td>Data formatting, encryption</td>
+        <td>SSL, TLS</td>
+      </tr>
+      <tr>
+        <td>5 – Session</td>
+        <td>Manages connections between devices</td>
+        <td>—</td>
+      </tr>
+      <tr>
+        <td>4 – Transport</td>
+        <td>End-to-end communication</td>
+        <td>TCP, UDP</td>
+      </tr>
+      <tr>
+        <td>3 – Network</td>
+        <td>Addressing and routing</td>
+        <td>IP</td>
+      </tr>
+      <tr>
+        <td>2 – Data Link</td>
+        <td>Frames, MAC addressing</td>
+        <td>Ethernet</td>
+      </tr>
+      <tr>
+        <td>1 – Physical</td>
+        <td>Cables, signals, hardware transmission</td>
+        <td>—</td>
+      </tr>
+    </tbody>
+  </table>
+</section>
+
+
+    <section id="definition" class="card-box">
+      <h2>Network Traffic Analysis Defined</h2>
+      <ul>
+        <li>Examining network traffic to monitor data flow and detect anomalies.</li>
+        <li>Characterizes common ports, protocols, and usage patterns.</li>
+        <li>Establishes a baseline for normal network behavior.</li>
+        <li>Monitors, detects, and responds to potential threats.</li>
+        <li>Provides insight into the organization’s network health and security posture.</li>
+      </ul>
+    </section>
+
+    <section id="osi" class="card-box">
+  <h2>Common Network Traffic Analysis Tools</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>Tool</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>tcpdump</td>
+        <td>Command-line packet capture and analysis tool.</td>
+      </tr>
+      <tr>
+        <td>Tshark</td>
+        <td>CLI network analyzer, live or file capture.</td>
+      </tr>
+      <tr>
+        <td>Wireshark</td>
+        <td>GUI packet analyzer for in-depth inspection.</td>
+      </tr>
+      <tr>
+        <td>NGrep</td>
+        <td>Pattern matching for packet data (like grep).</td>
+      </tr>
+      <tr>
+        <td>tcpick</td>
+        <td>TCP stream tracker and reassembler.</td>
+      </tr>
+      <tr>
+        <td>Network Taps</td>
+        <td>Hardware to copy network traffic for analysis.</td>
+      </tr>
+      <tr>
+        <td>SPAN Ports</td>
+        <td>Switch ports that duplicate traffic to monitoring devices.</td>
+      </tr>
+    </tbody>
+  </table>
+</section>
+
+
+    <section id="importance" class="card-box">
+      <h2>Importance of Network Traffic Analysis</h2>
+      <ul>
+        <li>Detects anomalies and suspicious traffic patterns early.</li>
+        <li>Improves network performance by identifying bottlenecks.</li>
+        <li>Supports forensic investigations and troubleshooting.</li>
+        <li>Strengthens overall network security by providing visibility.</li>
+      </ul>
+    </section>
+
+  </article>
+</main>
+
+<footer>
+  <p>© 2025 Digital Note — Lesson 5: Network Traffic Analysis</p>
+</footer>
+
+</body>
+</html>

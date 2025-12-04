@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Digital Note — Lesson 6: Path Traversal</title>
+  <link rel="stylesheet" href="lesson6.css">
+</head>
+<body>
+  <header>
+    <div class="header-container">
+      <h1 class="brand"><a href="lesson_page.html">Digital Note</a></h1>
+      <nav class="lesson-nav">
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="skill.html">Skill</a></li>
+          <li><a href="lesson_page.html" >Lessons</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <aside class="sidebar">
+      <h2>Contents</h2>
+      <nav>
+        <ul>
+          <li><a href="#intro">What is Path Traversal</a></li>
+          <li><a href="#attack">Directory Traversal Attacks</a></li>
+          <li><a href="#consequences">Consequences</a></li>
+          <li><a href="#prevention">Prevention</a></li>
+          <li><a href="#dir-tools">Directory Traversal Tools</a></li>
+        </ul>
+      </nav>
+    </aside>
+
+    <article class="content">
+      <section id="intro">
+        <h2>Path Traversal</h2>
+        <p>
+       <strong> Path Traversal (also called directory traversal)</strong> is a web security vulnerability that lets an attacker 
+        access files and directories outside the web-server’s intended directory by manipulating file path input. 
+        It happens when an application takes user-supplied path data (for example from a URL parameter, form field, or header) 
+        and uses it to open or include files without properly validating or sanitizing that input. By inserting sequences like ../
+        (or encoded variants such as %2e%2e%2f) an attacker can traverse up the filesystem tree and read, modify, or execute files
+        (for example /etc/passwd, configuration files, source code, or private data).
+        </p>
+      </section>
+
+      <section id="attack">
+        <h2>Directory Traversal Attacks</h2>
+        <p>
+          Also known as a <strong>path traversal attack</strong>, this occurs when an attacker manipulates file paths using unvalidated
+          input to access unauthorized files or directories.
+        </p>
+        <ul>
+          <li>Attackers use sequences like <code>../</code> or <code>%2e%2e%2f</code> to bypass restrictions.</li>
+          <li>The application fails to sanitize input properly.</li>
+          <li>The attacker retrieves files outside the intended directory (e.g., <code>/etc/passwd</code>).</li>
+        </ul>
+      </section>
+
+      <section id="consequences">
+        <h2>Consequences of Directory Traversal</h2>
+        <ul>
+          <li><strong>Unauthorized Access:</strong> Reading confidential files, such as configuration files or credentials.</li>
+          <li><strong>File Modification or Deletion:</strong> Altering or removing essential files may cause data loss or outages.</li>
+          <li><strong>System Compromise:</strong> Gained knowledge of system architecture can lead to deeper attacks.</li>
+        </ul>
+      </section>
+
+    
+
+      <section id="prevention">
+        <h2>Preventing Directory Traversal</h2>
+        <ul>
+          <li><strong>Validate and Sanitize Input:</strong> Only allow known-safe patterns (allowlist approach).</li>
+          <li><strong>Use Allow Lists:</strong> Define which files or directories users can access.</li>
+          <li><strong>Avoid Direct Input Usage:</strong> Don’t use user input directly in file paths.</li>
+          <li><strong>Normalize Paths:</strong> Use built-in functions to neutralize traversal sequences.</li>
+          <li><strong>Access Control:</strong> Apply the principle of least privilege.</li>
+          <li><strong>Isolate Environments:</strong> Use sandboxes or containers to limit file system exposure.</li>
+        </ul>
+      </section>
+
+      <section id="dir-tools">
+        <h2>Directory Traversal Tools</h2>
+        <p>
+          Security professionals use various tools to detect and analyze directory traversal vulnerabilities.
+          Below is a list of commonly used tools and their primary functions:
+        </p>
+
+        <table>
+          <thead>
+            <tr>
+              <th>Tool Name</th>
+              <th>Description</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Burp Suite</strong></td>
+              <td>Comprehensive web security testing platform capable of detecting directory traversal, SQLi, and XSS vulnerabilities.</td>
+            </tr>
+            <tr>
+              <td><strong>OWASP ZAP (Zed Attack Proxy)</strong></td>
+              <td>Open-source web scanner designed to identify security flaws like path traversal and injection attacks.</td>
+            </tr>
+            <tr>
+              <td><strong>Nikto</strong></td>
+              <td>Command-line web server scanner that detects misconfigurations, outdated software, and dangerous files.</td>
+            </tr>
+            <tr>
+              <td><strong>DotDotPwn</strong></td>
+              <td>Specialized tool created to test and exploit directory traversal vulnerabilities efficiently.</td>
+            </tr>
+            <tr>
+              <td><strong>Metasploit Framework</strong></td>
+              <td>Advanced penetration testing framework with modules for exploiting and testing traversal vulnerabilities.</td>
+            </tr>
+            <tr>
+              <td><strong>DirBuster</strong></td>
+              <td>OWASP tool used to brute-force hidden directories and files on web servers.</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <p>
+          These tools help cybersecurity experts find vulnerabilities before attackers can exploit them,
+          strengthening the overall security of web applications and infrastructure.
+        </p>
+      </section>
+    </article>
+  </main>
+
+  <footer>
+    <p>© 2025 Digital Note — Lesson 6: Path Traversal</p>
+  </footer>
+</body>
+</html>

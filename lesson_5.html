@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Digital Note — Lesson 5: Cross-Site Scripting (XSS)</title>
+  <link rel="stylesheet" href="lesson5.css">
+</head>
+<body>
+  <header>
+    <div class="header-container">
+      <h1 class="brand"><a href="lesson_page.html">Digital Note</a></h1>
+      <nav class="lesson-nav">
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="skill.html">Skill</a></li>
+          <li><a href="lesson_page.html" >Lessons</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <aside class="sidebar">
+      <h2>Contents</h2>
+      <nav>
+        <ul>
+          <li><a href="#intro">What is XSS?</a></li>
+          <li><a href="#how">How Does XSS Work?</a></li>
+          <li><a href="#conditions">When Do XSS Vulnerabilities Occur?</a></li>
+          <li><a href="#types">Types of XSS Attacks</a></li>
+          <li><a href="#reflected">Reflected XSS</a></li>
+          <li><a href="#stored">Stored XSS</a></li>
+          <li><a href="#dom">DOM-Based XSS</a></li>
+          <li><a href="#uxss">Universal XSS (uXSS)</a></li>
+          <li><a href="#selfxss">Self-XSS</a></li>
+          <li><a href="#impact">XSS Attack Consequences</a></li>
+          <li><a href="#prevention">XSS Prevention Techniques</a></li>
+        </ul>
+      </nav>
+    </aside>
+
+    <article class="content">
+
+      <section id="intro">
+        <h2>What is Cross-Site Scripting (XSS)?</h2>
+        <p>
+          <strong>Cross-Site Scripting (XSS)</strong> is a <strong>web security vulnerability</strong> that allows an attacker
+          to inject and execute malicious scripts (usually JavaScript) in a user’s browser when visiting a vulnerable website.
+        </p>
+        <p>
+          These attacks compromise user interactions, allowing attackers to steal data, impersonate users,
+          or alter the content and behavior of the site.
+        </p>
+        <p>
+          <strong>CWE-79:</strong> Improper Neutralization of Input During Web Page Generation (<em>‘Cross-Site Scripting’</em>).
+        </p>
+        <p><strong>Goal:</strong> Circumvent the browser’s <em>same-origin policy</em> to gain unauthorized access to data or actions.</p>
+      </section>
+
+      <section id="how">
+        <h2>How Does XSS Work?</h2>
+        <p>XSS attacks exploit how websites handle user input. The attacker injects malicious code that the web page later displays — the victim’s browser executes it as if it were legitimate site code.</p>
+        <ul>
+          <li>Attackers inject malicious JavaScript into a web page.</li>
+          <li>The browser executes the injected script in the website’s context.</li>
+          <li>The attacker gains access to user data, sessions, or can perform actions on behalf of the victim.</li>
+        </ul>
+        <p><strong>Example:</strong> A site dynamically displays a welcome message based on a URL parameter:</p>
+        <pre><code>&lt;h1&gt;Welcome, &lt;?php echo $_GET['name']; ?&gt;&lt;/h1&gt;</code></pre>
+        <p>If an attacker uses <code>?name=&lt;script&gt;alert('Hacked!')&lt;/script&gt;</code>, the browser will execute the script.</p>
+      </section>
+
+      <section id="conditions">
+        <h2>When Do XSS Vulnerabilities Occur?</h2>
+        <ul>
+          <li>Untrusted data (e.g., user input) is accepted by a web application.</li>
+          <li>The data is dynamically inserted into a web page without proper sanitization or escaping.</li>
+          <li>The injected content includes executable code (JavaScript, HTML, attributes, events, etc.).</li>
+          <li>The victim visits or interacts with the crafted web page.</li>
+          <li>The malicious script runs in the browser within the site’s domain — violating the same-origin policy.</li>
+        </ul>
+      </section>
+
+      <section id="types">
+        <h2>Types of XSS Attacks</h2>
+        <ul>
+          <li><strong>Reflected XSS</strong> (Non-Persistent / Type 1)</li>
+          <li><strong>Stored XSS</strong> (Persistent / Type 2)</li>
+          <li><strong>DOM-Based XSS</strong> (Type 0)</li>
+          <li><strong>Universal XSS (uXSS)</strong></li>
+          <li><strong>Self-XSS</strong></li>
+        </ul>
+      </section>
+
+      <section id="reflected">
+        <h2>Reflected XSS (Non-Persistent / Type 1)</h2>
+        <p>
+          Reflected XSS occurs when malicious input is immediately “reflected” back to the user in the web response.
+          The script runs when the user clicks a malicious link or submits a crafted form.
+        </p>
+        <ul>
+          <li>Payload is injected via URL parameters, form inputs, or headers.</li>
+          <li>The server embeds this input directly in the response page.</li>
+          <li>The script executes in the victim’s browser but is <strong>not stored</strong> on the server.</li>
+        </ul>
+        <p><strong>Example:</strong> <code>https://example.com/search?q=&lt;script&gt;alert('XSS')&lt;/script&gt;</code></p>
+      </section>
+
+      <section id="stored">
+        <h2>Stored XSS (Persistent / Type 2)</h2>
+        <p>
+          Stored XSS occurs when the malicious payload is permanently stored on the target server —
+          such as in a database, comment field, or user profile — and later served to other users.
+        </p>
+        <ul>
+          <li>Malicious input is saved (e.g., post, message, or review).</li>
+          <li>Every visitor who loads the affected page executes the attacker’s script.</li>
+          <li>More dangerous because it impacts many users automatically.</li>
+        </ul>
+        <p><strong>Example:</strong> A user posts a comment containing <code>&lt;script&gt;document.cookie&lt;/script&gt;</code> which runs for every viewer.</p>
+      </section>
+
+      <section id="dom">
+        <h2>DOM-Based XSS (Type 0)</h2>
+        <p>
+          A client-side vulnerability where the attack occurs entirely in the browser.
+          The page’s JavaScript modifies the DOM using untrusted data from sources like the URL or fragment identifier.
+        </p>
+        <ul>
+          <li>No server interaction — the payload stays on the client side.</li>
+          <li>Vulnerable JavaScript uses unescaped input to update the DOM.</li>
+          <li>Example source: <code>document.location</code>, <code>document.referrer</code>, or <code>window.name</code>.</li>
+        </ul>
+        <p><strong>Example:</strong></p>
+        <pre><code>document.getElementById("msg").innerHTML = location.hash.substring(1);</code></pre>
+        <p>Attacker URL: <code>#&lt;img src=x onerror=alert('XSS')&gt;</code></p>
+      </section>
+
+      <section id="uxss">
+        <h2>Universal Cross-Site Scripting (uXSS)</h2>
+        <p>
+          Universal XSS exploits vulnerabilities in the browser itself or browser extensions,
+          not in a specific website. It allows scripts to run on any page visited by the user.
+        </p>
+        <ul>
+          <li>Caused by browser or plugin security flaws.</li>
+          <li>Bypasses website-level protections like Content Security Policy (CSP).</li>
+          <li>Extremely critical due to its broad impact.</li>
+        </ul>
+      </section>
+
+      <section id="selfxss">
+        <h2>Self-XSS</h2>
+        <p>
+          Self-XSS is a social engineering trick where users are fooled into executing malicious scripts in their own browser console.
+        </p>
+        <ul>
+          <li>Attackers pose as “tech support” or promise free rewards.</li>
+          <li>Victims are asked to copy-paste code into the browser console.</li>
+          <li>Leads to account compromise or data theft.</li>
+          <li>No actual site vulnerability — only user manipulation.</li>
+        </ul>
+      </section>
+
+      <section id="impact">
+        <h2>XSS Attack Consequences</h2>
+        <ul>
+          <li><strong>Session Hijacking:</strong> Steal cookies or tokens to impersonate users.</li>
+          <li><strong>Data Theft:</strong> Extract sensitive info (emails, passwords, payments).</li>
+          <li><strong>Website Defacement:</strong> Modify displayed content.</li>
+          <li><strong>Malware Distribution:</strong> Redirect users to malicious sites.</li>
+          <li><strong>Account Takeover:</strong> Perform actions as the victim.</li>
+          <li><strong>Privilege Escalation:</strong> Gain admin access through chained exploits.</li>
+        </ul>
+      </section>
+
+      <section id="prevention">
+        <h2>XSS Prevention Techniques</h2>
+        <h3>1. Input Validation</h3>
+        <p>Validate all user input to ensure it conforms to expected types and formats. Use allowlists to accept only known-safe values.</p>
+
+        <h3>2. Contextual Output Encoding / Escaping</h3>
+        <p>
+          Encode or escape untrusted data before rendering it into HTML, attributes, JavaScript, or URLs.
+          This prevents browsers from interpreting user input as executable code.
+        </p>
+
+        <h3>3. Sanitization</h3>
+        <p>Use libraries such as DOMPurify (JavaScript) or HTML Purifier (PHP) to remove unsafe elements and attributes from HTML input.</p>
+
+        <h3>4. HTTPOnly Cookies</h3>
+        <p>Mark cookies as <code>HttpOnly</code> so they can’t be accessed via JavaScript, reducing session hijacking risk.</p>
+
+        <h3>5. Content Security Policy (CSP)</h3>
+        <p>
+          Implement a strong CSP header to control what scripts can run and where they can load from.
+          Example: <code>Content-Security-Policy: default-src 'self'; script-src 'self'</code>
+        </p>
+
+        <h3>6. Use Security Frameworks</h3>
+        <p>Modern frameworks (React, Angular, Django, etc.) automatically handle output escaping — use them properly to reduce XSS risks.</p>
+      </section>
+
+    </article>
+  </main>
+
+  <footer>
+    <p>© 2025 Digital Note — Lesson 5: Cross-Site Scripting (XSS)</p>
+  </footer>
+</body>
+</html>

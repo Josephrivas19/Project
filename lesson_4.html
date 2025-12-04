@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Digital Note — Lesson 4: SQL & SQL Injection</title>
+  <link rel="stylesheet" href="lesson4.css">
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header>
+    <div class="header-container">
+      <h1 class="brand"><a href="lesson_page.html">Digital Note</a></h1>
+      <nav class="lesson-nav">
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="skill.html">Skill</a></li>
+          <li><a href="lesson_page.html" >Lessons</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- MAIN -->
+  <main>
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+      <h2>Contents</h2>
+      <nav>
+        <ul>
+          <li><a href="#what-sql">What is SQL?</a></li>
+          <li><a href="#what-sqli">What is SQL Injection?</a></li>
+          <li><a href="#example">Vulnerable Example</a></li>
+          <li><a href="#prepared">Prepared Statements</a></li>
+          <li><a href="#validation">Input Validation</a></li>
+          <li><a href="#procedures">Stored Procedures</a></li>
+          <li><a href="#escaping">Escaping Input</a></li>
+        </ul>
+      </nav>
+    </aside>
+
+    <!-- CONTENT -->
+    <article class="content">
+
+      <!-- SQL -->
+      <section id="what-sql">
+        <h2>What is SQL?</h2>
+        <p><strong>SQL (Structured Query Language)</strong> is the main language used to manage and manipulate data in relational databases.</p>
+
+        <p><strong>Common SQL operations include:</strong></p>
+        <ul>
+          <li><code>SELECT</code> — retrieve data</li>
+          <li><code>INSERT</code> — add new data</li>
+          <li><code>UPDATE</code> — modify existing data</li>
+          <li><code>DELETE</code> — remove data</li>
+        </ul>
+
+        <p>When SQL queries use untrusted input without protection, attackers can alter the query — this is called <strong>SQL Injection (SQLi)</strong>.</p>
+      </section>
+
+      <!-- SQL Injection -->
+      <section id="what-sqli">
+        <h2>What is SQL Injection (SQLi)?</h2>
+        <p>
+          <strong>SQL Injection</strong> happens when user input is interpreted as SQL code instead of plain data.
+          This allows attackers to view, modify, or delete information in the database.
+        </p>
+
+        <h3>Impact of SQL Injection:</h3>
+        <ul>
+          <li>Bypass login authentication</li>
+          <li>Read private information</li>
+          <li>Delete or modify database content</li>
+          <li>Execute administrative queries</li>
+        </ul>
+      </section>
+
+      <!-- Example -->
+      <section id="example">
+        <h2>Vulnerable Example</h2>
+        <p>Unsafe string concatenation:</p>
+
+        <pre><code>query = "SELECT * FROM users WHERE username = '" + username + "'";</code></pre>
+
+        <p>If the attacker enters:</p>
+
+        <pre><code>' OR '1'='1</code></pre>
+
+        <p>The resulting SQL becomes:</p>
+
+        <pre><code>SELECT * FROM users WHERE username = '' OR '1'='1';</code></pre>
+
+        <p>This causes the query to always be TRUE and can reveal all users.</p>
+      </section>
+
+      <!-- Prepared Statements -->
+      <section id="prepared">
+        <h2>1. Prepared Statements / Parameterized Queries</h2>
+        <p>
+          The strongest protection against SQL Injection.
+          It ensures user input is treated as *data*, not as part of the SQL command.
+        </p>
+
+        <h3>Python</h3>
+        <pre><code>cur.execute(
+    "SELECT * FROM users WHERE username = %s",
+    (username,)
+)</code></pre>
+
+        <h3>PHP (PDO)</h3>
+        <pre><code>$stmt = $pdo->prepare("SELECT * FROM users WHERE username = :u");
+$stmt->execute([':u' => $username]);</code></pre>
+
+        <h3>Java (JDBC)</h3>
+        <pre><code>PreparedStatement ps = conn.prepareStatement(
+    "SELECT * FROM users WHERE username = ?"
+);
+ps.setString(1, username);</code></pre>
+      </section>
+
+      <!-- Validation -->
+      <section id="validation">
+        <h2>2. Input Validation</h2>
+        <p>Validate all input *before* passing it to SQL.</p>
+
+        <h3>Examples:</h3>
+        <ul>
+          <li>IDs → digits only</li>
+          <li>Email → must match strict patterns</li>
+          <li>Usernames → only letters, numbers, . _ -</li>
+        </ul>
+
+        <p><strong>Use allowlists</strong> (accept known good patterns), not denylists.</p>
+      </section>
+
+      <!-- Stored Procedures -->
+      <section id="procedures">
+        <h2>3. Stored Procedures</h2>
+        <p>Stored procedures can be safe — as long as they do not use string concatenation.</p>
+
+        <ul>
+          <li>SAFE → procedures using parameters</li>
+          <li>UNSAFE → concatenated SQL inside the procedure</li>
+        </ul>
+      </section>
+
+      <!-- Escaping -->
+      <section id="escaping">
+        <h2>4. Escaping User Input</h2>
+        <p>Escaping characters is only a fallback — not a primary defense.</p>
+
+        <ul>
+          <li>Escape single quotes → <code>' → ''</code></li>
+          <li>Still vulnerable in many cases</li>
+        </ul>
+
+        <p><strong>Always prefer prepared statements.</strong></p>
+      </section>
+
+    </article>
+  </main>
+
+  <!-- FOOTER -->
+  <footer>
+    <p>© 2025 Digital Note — Lesson 4: SQL & SQL Injection</p>
+  </footer>
+
+</body>
+</html>
